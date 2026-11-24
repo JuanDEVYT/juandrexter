@@ -226,7 +226,39 @@ a { color: inherit; }
 }
 
 /* Entrada en cascada al abrir una pestaña */
-.enter .item, .enter .about { animation: rise 1s var(--ease) both; animation-delay: calc(var(--i, 0) * 80ms); }
+.enter .item, .enter .about, .enter .go, .enter .otros-title { animation: rise 1s var(--ease) both; animation-delay: calc(var(--i, 0) * 80ms); }
+
+/* Otros: enlaces recomendados */
+.otros-title {
+  margin: 0 0 24px;
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: clamp(1.8rem, 4.4vw, 2.8rem);
+  line-height: 1.05;
+  text-wrap: balance;
+}
+.go {
+  display: block;
+  padding-block: 26px;
+  border-top: 1px solid var(--line);
+  text-decoration: none;
+  transition: opacity 0.6s var(--ease);
+}
+.go:last-child { border-bottom: 1px solid var(--line); }
+.go span {
+  display: block;
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: clamp(1.5rem, 4vw, 2.2rem);
+  line-height: 1.1;
+  overflow-wrap: break-word;
+  transition: transform 0.7s var(--ease);
+}
+@media (hover: hover) {
+  .golist:hover .go { opacity: 0.4; }
+  .golist .go:hover { opacity: 1; }
+  .go:hover span { transform: translateX(12px); }
+}
 
 /* Sobre mí */
 .about { display: grid; grid-template-columns: 9.5rem minmax(0, 1fr); gap: 28px; border-top: 1px solid var(--line); padding-block: 28px; }
@@ -284,6 +316,7 @@ footer a { text-underline-offset: 3px; }
     <nav class="tabs" aria-label="Secciones" id="tabs">
       <a href="#proyectos" id="tab-proyectos">Proyectos</a>
       <a href="#sobre-mi" id="tab-sobre-mi">Sobre mí</a>
+      <a href="#otros" id="tab-otros">Otros</a>
       <span class="ink" id="ink" aria-hidden="true"></span>
     </nav>
   </header>
@@ -328,6 +361,15 @@ footer a { text-underline-offset: 3px; }
         <div class="body">
           <p>Mi código está en <a href="https://github.com/JuanDEVYT" target="_blank" rel="noopener">github.com/JuanDEVYT</a>, con 36 repositorios públicos.</p>
         </div>
+      </div>
+    </section>
+
+    <section id="otros" class="otros" aria-label="Otros" hidden>
+      <h2 class="otros-title" style="--i:0">Enlaces que te recomiendo visitar</h2>
+      <div class="golist">
+        <a class="go" style="--i:1" href="https://kinotvapp.github.io/" target="_blank" rel="noopener"><span>kinotvapp.github.io</span></a>
+        <a class="go" style="--i:2" href="https://t.me/kinoapptv" target="_blank" rel="noopener"><span>t.me/kinoapptv</span></a>
+        <a class="go" style="--i:3" href="https://juandevyt.github.io/JuanModernUI/" target="_blank" rel="noopener"><span>juandevyt.github.io/<wbr>JuanModernUI</span></a>
       </div>
     </section>
   </main>
@@ -467,7 +509,7 @@ footer a { text-underline-offset: 3px; }
   });
 
   // Pestañas por hash: #proyectos (inicio) y #sobre-mi
-  var tabs = { "proyectos": "tab-proyectos", "sobre-mi": "tab-sobre-mi" };
+  var tabs = { "proyectos": "tab-proyectos", "sobre-mi": "tab-sobre-mi", "otros": "tab-otros" };
   var ink = document.getElementById("ink");
   var first = true;
 
